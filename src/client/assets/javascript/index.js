@@ -1,4 +1,4 @@
-// PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
+// PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE/EDIT
 
 // The store will hold all information needed globally
 var store = {
@@ -182,7 +182,7 @@ function renderRacerCars(racers) {
 
 	return `
 		<ul id="racers">
-			${reuslts}
+			${results}
 		</ul>
 	`
 }
@@ -193,9 +193,9 @@ function renderRacerCard(racer) {
 	return `
 		<li class="card podracer" id="${id}">
 			<h3>${driver_name}</h3>
-			<p>${top_speed}</p>
-			<p>${acceleration}</p>
-			<p>${handling}</p>
+			<p>Top Speed: ${top_speed}</p>
+			<p>Acceleration: ${acceleration}</p>
+			<p>Handling: ${handling}</p>
 		</li>
 	`
 }
@@ -208,7 +208,6 @@ function renderTrackCards(tracks) {
 	}
 
 	const results = tracks.map(renderTrackCard).join('')
-
 	return `
 		<ul id="tracks">
 			${results}
@@ -321,10 +320,16 @@ function defaultFetchOpts() {
 
 function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
+	return fetch(`${SERVER}/api/tracks`)
+			.then(response => response.json())
+			.catch(error => console.log('There was an error getting this track', error))
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
+	return fetch(`${SERVER}/api/cars`)
+			.then(response => response.json())
+			.catch(error => console.log('There was an error getting this racer', error))
 }
 
 function createRace(player_id, track_id) {

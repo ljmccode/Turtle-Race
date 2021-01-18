@@ -15,16 +15,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function onPageLoad() {
 	try {
-		getTracks()
+		await getTracks()
 			.then(tracks => {
 				const html = renderTrackCards(tracks)
-				renderAt('#tracks', html)
+				renderAt('#track-container', html)
 			})
 
-		getRacers()
+		await getRacers()
 			.then((racers) => {
 				const html = renderRacerCars(racers)
-				renderAt('#racers', html)
+				renderAt('#racer-container', html)
 			})
 	} catch(error) {                  
 		console.log("Problem getting tracks and racers ::", error.message)
@@ -35,15 +35,24 @@ async function onPageLoad() {
 function setupClickHandlers() {
 	document.addEventListener('click', event => {
 		const { target } = event
+		let parent = event.target.parentElement
 
 		// Race track form field
 		if (target.matches('.card.track')) {
 			handleSelectTrack(target)
 		}
 
+		if(target.matches('.track-info')) {
+			handleSelectTrack(parent)
+		}
+
 		// Podracer form field
 		if (target.matches('.card.podracer')) {
 			handleSelectPodRacer(target)
+		}
+
+		if (target.matches('.racer-info')) {
+			handleSelectPodRacer(parent)
 		}
 
 		// Submit create race form
@@ -192,10 +201,10 @@ function renderRacerCard(racer) {
 
 	return `
 		<li class="card podracer" id="${id}">
-			<h3>${driver_name}</h3>
-			<p>Top Speed: ${top_speed}</p>
-			<p>Acceleration: ${acceleration}</p>
-			<p>Handling: ${handling}</p>
+			<h3 class="racer-info">${driver_name}</h3>
+			<p class="racer-info">Top Speed: ${top_speed}</p>
+			<p class="racer-info">Acceleration: ${acceleration}</p>
+			<p class="racer-info">Handling: ${handling}</p>
 		</li>
 	`
 }
@@ -220,7 +229,7 @@ function renderTrackCard(track) {
 
 	return `
 		<li id="${id}" class="card track">
-			<h3>${name}</h3>
+			<h3 class="track-info">${name}</h3>
 		</li>
 	`
 }

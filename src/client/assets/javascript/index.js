@@ -58,14 +58,14 @@ function setupClickHandlers() {
 		// Submit create race form
 		if (target.matches('#submit-create-race')) {
 			event.preventDefault()
-			let target_name = target.getAttribute("track-name")
+			let track_name = target.getAttribute("track-name")
 			// start race
-			handleCreateRace(target_name)
+			handleCreateRace(track_name)
 		}
 
 		// Handle acceleration click
 		if (target.matches('#gas-peddle')) {
-			handleAccelerate(target)
+			handleAccelerate()
 		}
 
 	}, false)
@@ -131,7 +131,7 @@ function runRace(raceID) {
 		}
 
 		// TODO - use Javascript's built in setInterval method to get race info every 500ms
-		const raceInterval = setInterval(progress, 4000);
+		const raceInterval = setInterval(progress, 500);
 
 	/* 
 		TODO - if the race info status property is "finished", run the following:
@@ -147,7 +147,7 @@ function runRace(raceID) {
 async function runCountdown() {
 	try {
 		// wait for the DOM to load
-		await delay(1000)
+		await delay(500)
 		let timer = 3
 
 		return new Promise(resolve => {
@@ -207,6 +207,7 @@ function handleSelectTrack(target) {
 function handleAccelerate() {
 	console.log("accelerate button clicked")
 	// TODO - Invoke the API call to accelerate
+	accelerate(store.race_id)
 }
 
 // HTML VIEWS ------------------------------------------------
@@ -308,10 +309,7 @@ function resultsView(positions) {
 }
 
 function raceProgress(positions) {
-	console.log(store.player_id)
-	console.log(positions)
 	let userPlayer = positions.find(e => e.id === parseInt(store.player_id))
-	console.log(userPlayer)
 	userPlayer.driver_name += " (you)"
 
 	positions = positions.sort((a, b) => (a.segment > b.segment) ? -1 : 1)
@@ -400,6 +398,7 @@ function getRace(id) {
 }
 
 function startRace(id) {
+	console.log("Race ID", id)
 	return fetch(`${SERVER}/api/races/${id}/start`, {
 		method: 'POST',
 		...defaultFetchOpts(),
@@ -410,6 +409,9 @@ function startRace(id) {
 
 function accelerate(id) {
 	// POST request to `${SERVER}/api/races/${id}/accelerate`
-	// options parameter provided as defaultFetchOpts
-	// no body or datatype needed for this request
+	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
+		method: 'POST',
+			...defaultFetchOpts(),
+	})
+	.catch(err => console.log("Problem with getRace request::", err))
 }

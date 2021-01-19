@@ -331,14 +331,14 @@ function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
 	return fetch(`${SERVER}/api/tracks`)
 			.then(response => response.json())
-			.catch(error => console.log('There was an error getting this track', error))
+			.catch(error => console.log('There was an error getting the tracks', error))
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
 	return fetch(`${SERVER}/api/cars`)
 			.then(response => response.json())
-			.catch(error => console.log('There was an error getting this racer', error))
+			.catch(error => console.log('There was an error getting the racers', error))
 }
 
 function createRace(player_id, track_id) {

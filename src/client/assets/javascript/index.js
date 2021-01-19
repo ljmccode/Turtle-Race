@@ -58,9 +58,9 @@ function setupClickHandlers() {
 		// Submit create race form
 		if (target.matches('#submit-create-race')) {
 			event.preventDefault()
-	
+			let target_name = target.getAttribute("track-name")
 			// start race
-			handleCreateRace()
+			handleCreateRace(target_name)
 		}
 
 		// Handle acceleration click
@@ -82,18 +82,22 @@ async function delay(ms) {
 // ^ PROVIDED CODE ^ DO NOT REMOVE
 
 // This async function controls the flow of the race, add the logic and error handling
-async function handleCreateRace() {
+async function handleCreateRace(track_name) {
+	// get player_id and track_id from the store
+	let { player_id, track_id } = store;
 	// render starting UI
-	renderAt('#race', renderRaceStartView())
-
-	// TODO - Get player_id and track_id from the store
+	renderAt('#race', renderRaceStartView(track_name))
 	
-	// const race = TODO - invoke the API call to create the race, then save the result
-
+	// TODO - invoke the API call to create the race, then save the result
+	const race = await createRace(player_id, track_id);
+	
 	// TODO - update the store with the race id
-
+	store.race_id = race.ID
+	let { race_id } = store
+	
 	// The race has been created, now start the countdown
 	// TODO - call the async function runCountdown
+	await runCountdown()
 
 	// TODO - call the async function startRace
 
@@ -129,9 +133,9 @@ async function runCountdown() {
 
 		return new Promise(resolve => {
 			// TODO - use Javascript's built in setInterval method to count down once per second
-
+			setInterval(decrement, 1000)
 			// run this DOM manipulation to decrement the countdown for the user
-			document.getElementById('big-numbers').innerHTML = --timer
+			const decrement = () => document.getElementById('big-numbers').innerHTML = --timer
 
 			// TODO - if the countdown is done, clear the interval, resolve the promise, and return
 
@@ -158,7 +162,7 @@ function handleSelectPodRacer(target) {
 }
 
 function handleSelectTrack(target) {
-	console.log("selected a track", target.id)
+	let track_name = target.getAttribute("name")
 
 	// remove class selected from all track options
 	const selected = document.querySelector('#tracks .selected')
@@ -171,6 +175,9 @@ function handleSelectTrack(target) {
 
 	// save the selected track id to the store
 	store.track_id = target.id;
+
+	const sumbit_button = document.getElementById('submit-create-race');
+	sumbit_button.setAttribute('track-name', track_name);
 }
 
 function handleAccelerate() {
@@ -229,7 +236,7 @@ function renderTrackCard(track) {
 	const { id, name } = track
 
 	return `
-		<li id="${id}" class="card track">
+		<li id="${id}" class="card track" name="${name}">
 			<h3 class="track-info">${name}</h3>
 		</li>
 	`
@@ -245,7 +252,7 @@ function renderCountdown(count) {
 function renderRaceStartView(track, racers) {
 	return `
 		<header>
-			<h1>Race: ${track.name}</h1>
+			<h1>Race: ${track}</h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
@@ -359,6 +366,9 @@ function createRace(player_id, track_id) {
 
 function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
+	return fetch(`${SERVER}/api/races/${id}`)
+		.then((response) => response.json())
+		.catch((error) => console.log('There was an error getting the race', error))
 }
 
 function startRace(id) {

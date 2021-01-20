@@ -76,7 +76,7 @@ p {
   background-color: #4984a7;
   cursor: pointer;
   border-radius: 4px;
-  border-color: 1px solid green;
+  border-color: 1px solid #4984a7;
   color: white;
   font-size: 20px;
   text-transform: uppercase;
@@ -148,9 +148,6 @@ img {
 
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-  .racer-stats {
-    bottom: -4vh;
-  }
 
   img {
     height: 60px;

@@ -22,8 +22,15 @@ section#accelerate button {
     padding: 20px;
     border-radius: 180%;
     background-color:#4984a7;
-    border-color: #4984a7;
+    box-shadow: 4px 8px #28495c;
+    border: none;
+    outline: none;
     cursor: pointer;
+}
+
+section#accelerate button:active {
+    transform: translateY(4px);
+    box-shadow: 4px 4px #28495c;
 }
 
 #big-numbers {

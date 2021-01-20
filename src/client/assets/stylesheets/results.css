@@ -13,12 +13,12 @@ a {
     display: block;
     padding: 10px;
     width: 150px;
-    color: black;
-    background: gainsboro;
+    color: white;
+    background: #4984a7;
 }
 
 a:hover {
-    background-color: lightgreen;
+    background-color: #3e7392;
 }
 
 /* -------------------  TABLET  --------------------- */

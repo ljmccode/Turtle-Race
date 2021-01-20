@@ -27,8 +27,7 @@ async function onPageLoad() {
 				renderAt('#racer-container', html)
 			})
 	} catch (error) {
-		console.log("Problem getting tracks and racers ::", error.message)
-		console.error(error)
+		console.log("Problem getting tracks and racers:", error.message)
 	}
 }
 
@@ -75,7 +74,6 @@ async function delay(ms) {
 	try {
 		return await new Promise(resolve => setTimeout(resolve, ms));
 	} catch (error) {
-		console.log("an error shouldn't be possible here")
 		console.log(error)
 	}
 }
@@ -101,7 +99,6 @@ async function handleCreateRace(track_name) {
 
 	// TODO - call the async function startRace
 	await startRace(race_id);
-	console.log("Race has been started");
 
 	// TODO - call the async function runRace
 	await runRace(race_id);
@@ -171,8 +168,6 @@ async function runCountdown() {
 }
 
 function handleSelectPodRacer(target) {
-	console.log("selected a pod", target.id)
-
 	// remove class selected from all racer options
 	const selected = document.querySelector('#racers .selected')
 	if (selected) {
@@ -206,7 +201,6 @@ function handleSelectTrack(target) {
 }
 
 function handleAccelerate() {
-	console.log("accelerate button clicked")
 	// TODO - Invoke the API call to accelerate
 	accelerate(store.race_id)
 }
@@ -329,10 +323,7 @@ function raceProgress(positions) {
 	})
 	finished = finished.sort((a, b) => (a.final_position > b.final_position) ? 1 : -1)
 	inProgress = inProgress.sort((a, b) => (a.segment < b.segment) ? 1 : -1)
-	console.log("finished:", finished)
-	console.log("In Progress", inProgress)
 	let finalSort = finished.concat(inProgress);
-	console.log("Final Sort:", finalSort)
 	let count = 1
 
 	const results = finalSort.map(p => {
@@ -411,14 +402,14 @@ function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
 	return fetch(`${SERVER}/api/tracks`)
 		.then(response => response.json())
-		.catch(error => console.log('There was an error getting the tracks', error))
+		.catch(err => console.log('There was an error getting the tracks', err))
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
 	return fetch(`${SERVER}/api/cars`)
 		.then(response => response.json())
-		.catch(error => console.log('There was an error getting the racers', error))
+		.catch(err => console.log('There was an error getting the racers', err))
 }
 
 function createRace(player_id, track_id) {
@@ -433,14 +424,14 @@ function createRace(player_id, track_id) {
 		body: JSON.stringify(body)
 	})
 		.then(res => res.json())
-		.catch(err => console.log("Problem with createRace request::", err))
+		.catch(err => console.log("Problem with createRace request:", err))
 }
 
 function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
 	return fetch(`${SERVER}/api/races/${id}`)
 		.then((response) => response.json())
-		.catch((error) => console.log('There was an error getting the race', error))
+		.catch((err) => console.log('There was an error getting the race:', err))
 }
 
 function startRace(id) {
@@ -449,7 +440,7 @@ function startRace(id) {
 		...defaultFetchOpts(),
 	})
 		// .then(res => res.json())
-		.catch(err => console.log("Problem with getRace request::", err))
+		.catch(err => console.log("Problem with getRace request:", err))
 }
 
 function accelerate(id) {
@@ -458,5 +449,5 @@ function accelerate(id) {
 		method: 'POST',
 		...defaultFetchOpts(),
 	})
-		.catch(err => console.log("Problem with getRace request::", err))
+		.catch(err => console.log("Problem with getRace request:", err))
 }

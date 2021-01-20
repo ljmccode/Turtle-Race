@@ -114,8 +114,6 @@ function runRace(raceID) {
 		const progress = async () => {
 			try {
 				const raceInfo = await getRace(raceID)
-				console.log("Race Info", raceInfo)
-				console.log("Positions: ", raceInfo.positions)
 				if (raceInfo.status === 'in-progress') {
 					renderAt('#leaderBoard', raceProgress(raceInfo.positions))
 				}
@@ -132,7 +130,7 @@ function runRace(raceID) {
 		}
 
 		// TODO - use Javascript's built in setInterval method to get race info every 500ms
-		const raceInterval = setInterval(progress, 500);
+		const raceInterval = setInterval(progress, 400);
 
 		/* 
 			TODO - if the race info status property is "finished", run the following:
@@ -301,7 +299,6 @@ function renderRaceStartView(track, racers) {
 
 function resultsView(positions) {
 	positions.sort((a, b) => (a.final_position > b.final_position) ? 1 : -1)
-	
 
 	return `
 		<header>
@@ -318,13 +315,27 @@ function raceProgress(positions) {
 	
 	let userPlayer = positions.find(e => e.id === parseInt(store.player_id))
 	userPlayer.driver_name += " (You)"
-
 	let player_stats = [...positions]
 
-	positions = positions.sort((a, b) =>  b.segment - a.segment)
+	let finished = []
+	let inProgress = []
+
+	positions.forEach(p => {
+		if (p.final_position != undefined) {
+			finished.push(p)
+		} else {
+			inProgress.push(p)
+		}
+	})
+	finished = finished.sort((a, b) => (a.final_position > b.final_position) ? 1 : -1)
+	inProgress = inProgress.sort((a, b) => (a.segment < b.segment) ? 1 : -1)
+	console.log("finished:", finished)
+	console.log("In Progress", inProgress)
+	let finalSort = finished.concat(inProgress);
+	console.log("Final Sort:", finalSort)
 	let count = 1
 
-	const results = positions.map(p => {
+	const results = finalSort.map(p => {
 		return `
 			<tr>
 				<td>
@@ -338,8 +349,6 @@ function raceProgress(positions) {
 		//there are 201 segments in the race and I have kept track length as 25vh
 		const completetion = p.segment/201; 
 		let player_name = ''
-		console.log("player: ", p.driver_name)
-		console.log("user: ", userPlayer.driver_name)
 		if (p.driver_name === userPlayer.driver_name) {
 			player_name = p.driver_name.split(' ')[0]
 		} else {
@@ -429,14 +438,12 @@ function createRace(player_id, track_id) {
 
 function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
-	console.log(`${SERVER}/api/races/${id}`)
 	return fetch(`${SERVER}/api/races/${id}`)
 		.then((response) => response.json())
 		.catch((error) => console.log('There was an error getting the race', error))
 }
 
 function startRace(id) {
-	console.log("Race ID", id)
 	return fetch(`${SERVER}/api/races/${id}/start`, {
 		method: 'POST',
 		...defaultFetchOpts(),

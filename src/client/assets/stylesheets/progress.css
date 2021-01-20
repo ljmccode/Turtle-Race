@@ -6,18 +6,20 @@ header {
 }
 
 main#two-columns {
-    margin: 50px 0;
-    display: flex;
+    margin: 25px 0;
+    /* display: flex; */
 }
 
 main#two-columns section {
-    max-width: 50vw;
+    max-width: 90vw;
 }
 
 section#accelerate button {
-    height: 300px;
-    width: 300px;
-    margin: 30px auto;
+    display: block;
+    height: 150px;
+    width: 150px;
+    margin: 70px auto;
+    padding: 20px;
     border-radius: 180%;
     background-color: green;
     border-color: rgb(14, 166, 6);
@@ -27,6 +29,24 @@ section#accelerate button {
 #big-numbers {
     font-weight: bolder;
     font-size: 70px;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+section {
+    padding: 0px;
+}
+
+h4 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.race-track:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 /* -------------------  TABLET  --------------------- */
@@ -37,6 +57,33 @@ section#accelerate button {
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
+    header {
+        background-image: url('../img/turtle_img.jpg');
+      }
+      
+      main#two-columns {
+          margin: 50px 0;
+          display: flex;
+      }
+      
+      main#two-columns section {
+          max-width: 50vw;
+      }
+      
+      section#accelerate button {
+          height: 300px;
+          width: 300px;
+          margin: 30px auto;
+          border-radius: 180%;
+          background-color: green;
+          border-color: rgb(14, 166, 6);
+          cursor: pointer;
+      }
+      
+      #big-numbers {
+          font-weight: bolder;
+          font-size: 70px;
+      }
 }
 
 /* -------------------  LARGE SCREENS  -------------- */

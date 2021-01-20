@@ -1,5 +1,6 @@
 form ul {
     display: flex;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
@@ -9,7 +10,7 @@ form li {
     -moz-box-shadow: 5px 7px 5px 0px rgba(237,230,237,1);
     box-shadow: 5px 7px 5px 0px rgba(237,230,237,1);
     max-width: 300px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #fbf5f5;
     cursor: pointer;
     transition: all .6s;
@@ -28,4 +29,31 @@ form li h3 {
     border-bottom: 1px solid #545454;
     padding-bottom: 10px;
     margin-bottom: 10px;
+}
+
+.card {
+    width: 150px;
+    height: 150px
+}
+
+.cards-list {
+    padding: 10px;
+    align-content: center;
+}
+
+#tracks, #racers {
+    margin: 0;
+    justify-content: center;
+}
+
+.podracer {
+    text-align: center;
+}
+
+.results {
+    margin-bottom: 20px;
+}
+
+.racer-stats {
+    text-align: center;
 }

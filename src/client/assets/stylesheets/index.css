@@ -207,11 +207,11 @@ img {
     color: black;
     font-weight: normal;
     font-size: 25px;
+    padding: 1px;
   }
   
   h4 {
     color: #545454;
-    font-weight: light;
     font-size: 20px;
   }
   

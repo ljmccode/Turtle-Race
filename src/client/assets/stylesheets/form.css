@@ -26,19 +26,27 @@ form li.selected {
 }
 
 form li h3 {
-    border-bottom: 1px solid #545454;
+    
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
+.racer-name {
+    border-bottom: 1px solid #545454;
+}
+
 .card {
     width: 150px;
-    height: 150px
+    height: 150px;
+}
+
+.track {
+    padding: 50px 0;
 }
 
 .cards-list {
     padding: 10px;
-    align-content: center;
+    justify-content: center;
 }
 
 #tracks, #racers {
@@ -51,9 +59,13 @@ form li h3 {
 }
 
 .results {
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
 
 .racer-stats {
     text-align: center;
+}
+
+#leaderBoard {
+    margin-bottom: 50px;
 }

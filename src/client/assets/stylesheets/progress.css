@@ -41,6 +41,7 @@ section {
 h4 {
     font-weight: bold;
     text-align: center;
+    margin: 5px;
 }
 
 .race-track:after {

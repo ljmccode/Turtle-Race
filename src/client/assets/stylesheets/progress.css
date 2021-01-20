@@ -21,8 +21,8 @@ section#accelerate button {
     margin: 70px auto;
     padding: 20px;
     border-radius: 180%;
-    background-color: green;
-    border-color: rgb(14, 166, 6);
+    background-color:#4984a7;
+    border-color: #4984a7;
     cursor: pointer;
 }
 
@@ -50,18 +50,19 @@ h4 {
     clear: both;
 }
 
+#gas-peddle {
+    font-size: 20px;
+    color: white;
+}
+
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
-
+    
 }
 
 /* -------------------  DESKTOP  -------------------- */
 
 @media (min-width: 1224px) {
-    header {
-        background-image: url('../img/turtle_img.jpg');
-      }
-      
       main#two-columns {
           margin: 50px 0;
           display: flex;
@@ -74,16 +75,11 @@ h4 {
       section#accelerate button {
           height: 300px;
           width: 300px;
-          margin: 30px auto;
-          border-radius: 180%;
-          background-color: green;
-          border-color: rgb(14, 166, 6);
-          cursor: pointer;
+          margin: 100px auto;
       }
-      
-      #big-numbers {
-          font-weight: bolder;
-          font-size: 70px;
+
+      #leaderBoard {
+          width: 500px;
       }
 }
 

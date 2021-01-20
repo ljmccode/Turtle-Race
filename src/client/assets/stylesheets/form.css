@@ -14,19 +14,20 @@ form li {
     border: 1px solid #fbf5f5;
     cursor: pointer;
     transition: all .6s;
+    background: #a8bb97;
 }
 
 form li:hover {
     box-shadow: none;
-    border: 1px solid rgb(109, 233, 23);
+    border: 1px solid rgb(97, 23, 233);
 }
 
 form li.selected {
-    border: 1px solid rgb(109, 233, 23);
+    border: 2px solid rgb(97, 23, 233);
 }
 
 form li h3 {
-    
+    font-size: 16px;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
@@ -36,8 +37,8 @@ form li h3 {
 }
 
 .card {
-    width: 150px;
-    height: 150px;
+    width: 124px;
+    height: 124px;
 }
 
 .track {
@@ -51,7 +52,8 @@ form li h3 {
 
 #tracks, #racers {
     margin: 0;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding: 0px;
 }
 
 .podracer {
@@ -68,4 +70,36 @@ form li h3 {
 
 #leaderBoard {
     margin-bottom: 50px;
+}
+
+p.racer-info {
+    font-size: 14px;
+}
+
+/* -------------------  DESKTOP  -------------------- */
+@media (min-width: 1224px) { 
+    .card {
+        width: 150px;
+        height: 150px;
+    }
+
+    #tracks, #racers {
+        margin: 0;
+        justify-content: center;
+    }
+
+    .track {
+        padding: 50px 0;
+    }
+    form li h3 {
+        font-size: 18px;
+    }
+    p.racer-info {
+        font-size: 16px;
+    }
+}
+
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: 1824px) {
 }

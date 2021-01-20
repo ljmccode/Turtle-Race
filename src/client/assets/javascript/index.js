@@ -122,6 +122,7 @@ function runRace(raceID) {
 				if (raceInfo.status === 'finished') {
 					clearInterval(raceInterval);
 					renderAt('#race', resultsView(raceInfo.positions))
+					document.querySelector(".race-track").innerHTML = ""
 					resolve(raceInfo)
 				}
 			} catch (error) {
@@ -236,7 +237,7 @@ function renderRacerCard(racer) {
 
 	return `
 		<li class="card podracer" id="${id}">
-			<h3 class="racer-info">${driver_name}</h3>
+			<h3 class="racer-info racer-name">${driver_name}</h3>
 			<p class="racer-info">Top Speed: ${top_speed}</p>
 			<p class="racer-info">Acceleration: ${acceleration}</p>
 			<p class="racer-info">Handling: ${handling}</p>
@@ -300,6 +301,7 @@ function renderRaceStartView(track, racers) {
 
 function resultsView(positions) {
 	positions.sort((a, b) => (a.final_position > b.final_position) ? 1 : -1)
+	
 
 	return `
 		<header>

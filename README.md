@@ -4,6 +4,14 @@
 
 Test your skills in this simulated turtle racing game!  Choose between 5 different racers and 6 tracks to get started. A pre-built API by a team at Udacity will create the race selected by the player and return a stream of information lasting the duration of the race, resulting in a final ranking of turtles. This project utilizes Promises and Async/Await to create races, display realtime race updates, and show a final score/rankings view.
 
+### Choose Race View
+
+<img src="./src/client/assets/img/choose_race.png" alt="choose race" width="300">
+
+### Race View
+
+<img src="./src/client/assets/img/race_view.png" alt="choose race" width="300">
+
 ### Player Instructions
 
 The strategy of the game is for a player to choose a turtle they expect to win on a certain race track based on the turtle's characteristics (acceleration, handling, and top speed). The game begins and the player accelerates their racer by clicking an acceleration button. As they accelerate, so do the other players and the leaderboard live-updates as players change position on the track. Once all turtles have crossed the finish line, a final view will show the players' rankings.

@@ -78,14 +78,13 @@ async function handleCreateRace(track_name) {
 
     try {
         let race = await createRace(player_id, track_id);
-        
+
         // Handles backend bug in with the http://localhost:8000/api/races/1/start endpoint
         if (race.ID === 2) {
             race = await createRace(player_id, track_id);
         }
         store.race_id = race.ID - 1;
         const { race_id } = store;
-        console.log(store)
         // Start game countdown once race created
         await runCountdown();
 
@@ -403,7 +402,6 @@ function startRace(id) {
         method: "POST",
         ...defaultFetchOpts(),
     })
-    .then(console.log(`Just started race with race id ${store.race_id} here: ${SERVER}/api/races/${id}/start`))
     .catch(err => console.log("Problem with getRace request:", err));
 }
 
